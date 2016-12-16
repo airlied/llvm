@@ -348,6 +348,7 @@ void initializeSLPVectorizerPass(PassRegistry&);
 void initializeSROALegacyPassPass(PassRegistry&);
 void initializeSafeStackLegacyPassPass(PassRegistry&);
 void initializeSafepointIRVerifierPass(PassRegistry&);
+void initializeSYCLArgsFlatteningPass(PassRegistry&);
 void initializeSampleProfileLoaderLegacyPassPass(PassRegistry&);
 void initializeSanitizerCoverageModulePass(PassRegistry&);
 void initializeScalarEvolutionWrapperPassPass(PassRegistry&);
