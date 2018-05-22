@@ -19,6 +19,9 @@
 #include "llvm/IR/Function.h"
 
 namespace llvm {
+
+class Pass;
+Pass *createSYCLArgsFlatteningPass(unsigned maxElements = 0);
 namespace sycl {
 
 /// Test if a function is a SYCL kernel
