@@ -1056,6 +1056,13 @@ INITIALIZE_PASS_DEPENDENCY(TargetLibraryInfoWrapperPass)
 INITIALIZE_PASS_END(SYCLArgsFlattening, "SYCL-args-flattening",
                     "Promote 'by reference' arguments to scalars", false, false)
 
+struct InitSYCLArgsFlattening {
+  InitSYCLArgsFlattening() {
+    initializeSYCLArgsFlatteningPass(*PassRegistry::getPassRegistry());
+  }
+};
+
+static InitSYCLArgsFlattening DoTheInitialization;
 Pass *llvm::createSYCLArgsFlatteningPass(unsigned MaxElements) {
   return new SYCLArgsFlattening(MaxElements);
 }
