@@ -138,7 +138,8 @@ struct inSPIRation : public ModulePass {
       DEBUG(dbgs() << "Type name " << TypeName
             << '\n' << std::regex_replace(TypeName, RE_i32, "int")
             << '\n' << buildSPIRType(A)<< '\n';
-            A.getType()->dump(););
+            //A.getType()->dump();
+	    );
       Types.push_back(llvm::MDString::get(Ctx, buildSPIRType(A)));
 
       std::string TypeQual;
