@@ -55,7 +55,7 @@ struct inSPIRation : public ModulePass {
 
 
   bool doInitialization(Module &M) override {
-    DEBUG(errs() << "Enter: " << M.getModuleIdentifier() << "\n\n");
+    LLVM_DEBUG(errs() << "Enter: " << M.getModuleIdentifier() << "\n\n");
 
     // Do not change the code
     return false;
@@ -63,7 +63,7 @@ struct inSPIRation : public ModulePass {
 
 
   bool doFinalization(Module &M) override {
-    DEBUG(errs() << "Exit: " << M.getModuleIdentifier() << "\n\n");
+    LLVM_DEBUG(errs() << "Exit: " << M.getModuleIdentifier() << "\n\n");
 
     // Do not change the code
     return false;
@@ -135,7 +135,7 @@ struct inSPIRation : public ModulePass {
       SO << *A.getType();
       SO.flush();
       std::regex RE_i32 { "i32" };
-      DEBUG(dbgs() << "Type name " << TypeName
+      LLVM_DEBUG(dbgs() << "Type name " << TypeName
             << '\n' << std::regex_replace(TypeName, RE_i32, "int")
             << '\n' << buildSPIRType(A)<< '\n';
             //A.getType()->dump();

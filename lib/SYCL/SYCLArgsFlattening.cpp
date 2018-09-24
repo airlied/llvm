@@ -230,7 +230,7 @@ doPromotion(Function *F, SmallPtrSetImpl<Argument *> &ArgsToPromote,
   NF->setSubprogram(F->getSubprogram());
   F->setSubprogram(nullptr);
 
-  DEBUG(dbgs() << "ARG PROMOTION:  Promoting to:" << *NF << "\n"
+  LLVM_DEBUG(dbgs() << "ARG PROMOTION:  Promoting to:" << *NF << "\n"
                << "From: " << *F);
 
   // Recompute the parameter attributes list based on the new arguments for
@@ -436,7 +436,7 @@ doPromotion(Function *F, SmallPtrSetImpl<Argument *> &ArgsToPromote,
         I2->setName(I->getName() + ".val");
         LI->replaceAllUsesWith(&*I2);
         LI->eraseFromParent();
-        DEBUG(dbgs() << "*** Promoted load of argument '" << I->getName()
+        LLVM_DEBUG(dbgs() << "*** Promoted load of argument '" << I->getName()
                      << "' in function '" << F->getName() << "'\n");
       } else {
         GetElementPtrInst *GEP = cast<GetElementPtrInst>(I->user_back());
@@ -463,7 +463,7 @@ doPromotion(Function *F, SmallPtrSetImpl<Argument *> &ArgsToPromote,
         NewName += ".val";
         TheArg->setName(NewName);
 
-        DEBUG(dbgs() << "*** Promoted agg argument '" << TheArg->getName()
+        LLVM_DEBUG(dbgs() << "*** Promoted agg argument '" << TheArg->getName()
                      << "' of function '" << NF->getName() << "'\n");
 
         // All of the uses must be load instructions.  Replace them all with
@@ -698,7 +698,7 @@ static bool isSafeToPromoteArgument(Argument *Arg, bool isByValOrInAlloca,
     // to do.
     if (ToPromote.find(Operands) == ToPromote.end()) {
       if (MaxElements > 0 && ToPromote.size() == MaxElements) {
-        DEBUG(dbgs() << "SYCL-args-flattening not promoting argument '"
+        LLVM_DEBUG(dbgs() << "SYCL-args-flattening not promoting argument '"
                      << Arg->getName()
                      << "' because it would require adding more "
                      << "than " << MaxElements
@@ -911,7 +911,7 @@ promoteArguments(Function *F, function_ref<AAResults &(Function &F)> AARGetter,
     if (isSafeToPromote) {
       if (StructType *STy = dyn_cast<StructType>(AgTy)) {
         if (MaxElements > 0 && STy->getNumElements() > MaxElements) {
-          DEBUG(dbgs() << "SYCL-args-flattening disable promoting argument '"
+          LLVM_DEBUG(dbgs() << "SYCL-args-flattening disable promoting argument '"
                        << PtrArg->getName()
                        << "' because it would require adding more"
                        << " than " << MaxElements
